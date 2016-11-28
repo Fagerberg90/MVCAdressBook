@@ -4,11 +4,23 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+@{var ajaxOptions = new AjaxOptions
+    {
+        Confirm = "Are you sure you want to delete the person?",
+        HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "result"
 
-<p>
+    };
+}
+<h2>Adress List</h2>
+
+@using (Ajax.BeginForm("Create", ajaxOptions))
+
+
+{<p>
     @Html.ActionLink("Create New", "Create")
-</p>
+</p>}
 <table class="table">
     <tr>
         <th>
@@ -25,35 +37,38 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.time)
-         
+
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PersonId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PersonName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PersonPhoneNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PersonAdress)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.time)
-          
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PersonId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.PersonId}) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.PersonId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.PersonId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PersonName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PersonPhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PersonAdress)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.time)
+
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {id = item.PersonId}) |
+                @Html.ActionLink("Details", "Details", new {id = item.PersonId}) |
+                @Ajax.ActionLink("Delete", "Delete", new {id = item.PersonId}, ajaxOptions)
+            </td>
+        </tr>
+    }
 
 </table>
+<script src="~/Scripts/jquery-3.1.1.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>

@@ -16,6 +16,7 @@ namespace MVCAdressBook.Models
         public int PersonPhoneNumber { get; set; }
         [Display(Name = "Adress:")]
         public string PersonAdress { get; set; }
+        [Display(Name = "Registred:")]
         public DateTime time { get; set; }
     }
 }

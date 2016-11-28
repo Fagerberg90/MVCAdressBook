@@ -4,15 +4,24 @@
     ViewBag.Title = "Create";
 }
 
+ @{var ajaxOptions = new AjaxOptions
+    {
+        Confirm = "Are you sure you want to create a adress for a person?",
+            HttpMethod = "POST",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "result"
+
+    };
+}
 <h2>Create</h2>
 
+@using (Ajax.BeginForm("Create", ajaxOptions))
 
-@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>PersonModels</h4>
+        <h4>Person</h4>
         <hr />
       
         
@@ -58,3 +67,4 @@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script src="~/Scripts/jquery.validate.min.js"></script>
 <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
